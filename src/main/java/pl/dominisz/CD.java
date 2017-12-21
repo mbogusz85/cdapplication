@@ -52,4 +52,10 @@ public class CD {
                 .filter(track -> track.getTitle().toLowerCase().contains(lowerCaseTitle))
                 .collect(Collectors.toList());
     }
+
+    public List<Track> findTracksByGenre(Genre genre) {
+        return tracks.stream()
+                .filter(track -> track.getGenre() == genre)
+                .collect(Collectors.toList());
+    }
 }

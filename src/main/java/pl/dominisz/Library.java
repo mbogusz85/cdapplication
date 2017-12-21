@@ -52,15 +52,24 @@ public class Library {
     }
 
     public List<Track> findTracksByGenre(Genre genre) {
-
+        return cdList.stream()
+                .flatMap(cd -> cd.findTracksByGenre(genre).stream())
+                .collect(Collectors.toList());
     }
 
     public List<CD> findCDsByGenre(Genre genre) {
-
+        return cdList.stream()
+                .filter(
+                        cd -> cd.getTracks().stream()
+                                .anyMatch(track -> track.getGenre() == genre)
+                )
+                .collect(Collectors.toList());
     }
 
     public List<CD> findByReleaseYear(int releaseYear) {
-
+        return cdList.stream()
+                .filter(cd -> cd.getReleaseYear() == releaseYear)
+                .collect(Collectors.toList());
     }
 
     public void saveToFile() {
