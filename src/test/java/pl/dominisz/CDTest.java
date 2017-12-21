@@ -21,10 +21,11 @@ class CDTest {
         Track track03 = new TrackBuilder()
                 .withTime(300)
                 .build();
-        CD cd = new CD("title", "artist", 2000);
-        cd.addTrack(track01);
-        cd.addTrack(track02);
-        cd.addTrack(track03);
+        CD cd = new CDBuilder()
+                .withTrack(track01)
+                .withTrack(track02)
+                .withTrack(track03)
+                .build();
         assertTrue(cd.getTotalTime() == 100 + 200 + 300);
     }
 
@@ -36,9 +37,10 @@ class CDTest {
         Track track02 = new TrackBuilder()
                 .withGenre(Genre.RAP)
                 .build();
-        CD cd = new CD("artist", "title", 2000);
-        cd.addTrack(track01);
-        cd.addTrack(track02);
+        CD cd = new CDBuilder()
+                .withTrack(track01)
+                .withTrack(track02)
+                .build();
         assertTrue(cd.getGenres().size() == 2);
         assertTrue(cd.getGenres().contains(Genre.POP));
         assertTrue(cd.getGenres().contains(Genre.RAP));
