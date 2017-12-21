@@ -27,7 +27,7 @@ public class CD {
         tracks.add(track);
     }
 
-    public int totalTime() {
+    public int getTotalTime() {
         return tracks.stream()
                 .mapToInt(track -> track.getTime())
                 .sum();
