@@ -102,7 +102,12 @@ public class Library {
     }
 
     private void saveTrackToFile(PrintWriter printWriter, Track track) {
-
+        printWriter.println(track.getTitle());
+        printWriter.println(track.getTime());
+        printWriter.println(track.getGenre());
+        printWriter.println(track.getArtist());
+        printWriter.println(track.getComposer());
+        printWriter.println(track.getLyricsAuthor());
     }
 
     public void loadFromFile() {
