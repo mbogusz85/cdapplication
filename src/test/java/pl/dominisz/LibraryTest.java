@@ -38,4 +38,10 @@ public class LibraryTest {
         library.addCD(cd);
         library.saveToFile();
     }
+
+    @Test
+    public void testLoadFromFile() {
+        Library library = new Library();
+        library.loadFromFile();
+    }
 }

@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 import java.util.stream.Collectors;
 
 /*
@@ -111,6 +112,51 @@ public class Library {
     }
 
     public void loadFromFile() {
+        try {
+            File file = new File(FILENAME);
+            Scanner in = new Scanner(file);
+            cdList.clear();
+            int number = Integer.parseInt(in.nextLine());
+            for (int i = 0; i < number; i++) {
+                cdList.add(loadCDFromFile(in));
+            }
+            in.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("Problem z odczytem pliku " + FILENAME);
+        }
+    }
 
+    private CD loadCDFromFile(Scanner in) {
+        String title = in.nextLine();
+        String artist = in.nextLine();
+        int trackCount = Integer.parseInt(in.nextLine());
+        List<Track> tracks = new ArrayList<>();
+        for (int i = 0; i < trackCount; i++) {
+            tracks.add(loadTrackFromFile(in));
+        }
+        int releaseYear = Integer.parseInt(in.nextLine());
+        return new CDBuilder()
+                .withTitle(title)
+                .withArtist(artist)
+                .withTracks(tracks)
+                .withReleaseYear(releaseYear)
+                .build();
+    }
+
+    private Track loadTrackFromFile(Scanner in) {
+        String title = in.nextLine();
+        int time = Integer.parseInt(in.nextLine());
+        Genre genre = Genre.valueOf(in.nextLine());
+        String artist = in.nextLine();
+        String composer = in.nextLine();
+        String lyricsAuthor = in.nextLine();
+        return new TrackBuilder()
+                .withLyricsAuthor(lyricsAuthor)
+                .withComposer(composer)
+                .withArtist(artist)
+                .withGenre(genre)
+                .withTime(time)
+                .withTitle(title)
+                .build();
     }
 }
