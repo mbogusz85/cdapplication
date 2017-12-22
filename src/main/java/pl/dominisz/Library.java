@@ -1,5 +1,8 @@
 package pl.dominisz;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -13,6 +16,8 @@ zapis danych na dysk,
 odczyt z dysku, pliki tekstowe
  */
 public class Library {
+
+    private static final String FILENAME = "library.txt";
 
     private List<CD> cdList;
 
@@ -73,6 +78,30 @@ public class Library {
     }
 
     public void saveToFile() {
+        try {
+            File file = new File(FILENAME);
+            PrintWriter printWriter = new PrintWriter(file);
+            printWriter.println(cdList.size());
+            for (CD cd : cdList) {
+                saveCDToFile(printWriter, cd);
+            }
+            printWriter.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("Problem z zapisem do pliku " + FILENAME);
+        }
+    }
+
+    private void saveCDToFile(PrintWriter printWriter, CD cd) {
+        printWriter.println(cd.getTitle());
+        printWriter.println(cd.getArtist());
+        printWriter.println(cd.getTracks().size());
+        for (Track track:cd.getTracks()) {
+            saveTrackToFile(printWriter, track);
+        }
+        printWriter.println(cd.getReleaseYear());
+    }
+
+    private void saveTrackToFile(PrintWriter printWriter, Track track) {
 
     }
 
