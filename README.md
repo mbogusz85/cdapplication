@@ -7,6 +7,19 @@
 - klasa biblioteka - kolekcja płyt, metody dodawanie płyty, usuwanie płyty, wyszukiwanie na podstawie kryteriów: szukaj po tytule płyty, szukaj po tytule utworu, szukaj po gatunkach, szukaj po roku wydania, zapis danych na dysk, odczyt z dysku, pliki tekstowe
 - klasa utwór: tytuł, długość w sekundach, gatunek, wykonawca, kompozytor, autor tekstu
 
+## Obsługa przy pomocy menu tekstowego
+
+1. Dodaj nową płytę
+2. Usuń płytę
+3. Wyświetl wszystkie płyty
+4. Wyszukaj płyty po tytule płyty
+5. Wyszukaj utwory po tytule utworu
+6. Wyszukaj płyty po tytule utworu
+7. Wyszukaj płyty po gatunku
+8. Wyszukaj utwory po gatunku
+9. Wyszukaj płty po roku wydania
+10. Wyjdź z programu 
+
 ## Format pliku z danymi
 
 1. N - liczba płyt w bibliotece
