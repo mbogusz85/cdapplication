@@ -58,4 +58,9 @@ public class CD {
                 .filter(track -> track.getGenre() == genre)
                 .collect(Collectors.toList());
     }
+
+    public String toString() {
+        return artist + ", " + title + ", " + releaseYear + ", tracks: " + tracks.size();
+    }
+
 }
