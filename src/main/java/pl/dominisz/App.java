@@ -1,6 +1,7 @@
 package pl.dominisz;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -33,32 +34,46 @@ public class App {
         System.out.println("10. Wyjdź z programu");
     }
 
+    private Menu createMainMenu() {
+        Menu menu = new Menu();
+        menu.add("Dodaj nową płytę", () -> addNewCD());
+        menu.add("Usuń płytę", () -> deleteCD());
+        menu.add("Wyświetl wszystkie płyty", () -> showAllCDs());
+        menu.add("Wyszukaj płyty po tytule płyty", () -> findByCDTitle());
+        menu.add("Wyszukaj utwory po tytule utworu", () -> findTracksByTrackTitle());
+        return menu;
+    }
+
+    private void findTracksByTrackTitle() {
+    }
+
+    private void findByCDTitle() {
+
+    }
+
+    private void showAllCDs() {
+        List<CD> allCDs = library.getCdList();
+        for (int i = 0; i < allCDs.size(); i++) {
+            System.out.println((i + 1) + ". " + allCDs.get(i));
+        }
+    }
+
+    private void deleteCD() {
+
+    }
+
+    private void addNewCD() {
+
+    }
+
     private void mainMenu() {
         System.out.println("Witamy w programie");
+        Menu mainMenu = createMainMenu();
         boolean again = true;
         while (again) {
-            showMainMenu();
-            int option = readInt(10);
-            switch (option) {
-                case 1:
-                    //addNewCD();
-                    break;
-                case 2:
-                    //deleteCD();
-                    break;
-                case 3:
-                    //showAllCDs();
-                    break;
-                case 4:
-                    //findByCDTitle();
-                    break;
-                case 5:
-                    //findTracksByTrackTitle();
-                    break;
-                case 10:
-                    again = false;
-                    break;
-            }
+            mainMenu.showMessages();
+            int option = readInt(mainMenu.size());
+            mainMenu.runAction(option);
         }
     }
 

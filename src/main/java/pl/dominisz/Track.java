@@ -3,8 +3,6 @@ package pl.dominisz;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-import java.util.Set;
-
 @Data
 @AllArgsConstructor
 public class Track {
@@ -15,5 +13,14 @@ public class Track {
     private String artist;
     private String composer;
     private String lyricsAuthor;
+
+    public String toString() {
+        return title + ", "
+                + time + ", "
+                + genre.getDescription() + ", wykonawca: "
+                + artist + ", kompozytor: "
+                + composer + ", autor tekstu: "
+                + lyricsAuthor;
+    }
 
 }
