@@ -60,7 +60,11 @@ public class CD {
     }
 
     public String toString() {
-        return artist + ", " + title + ", " + releaseYear + ", tracks: " + tracks.size();
+        return artist + ", "
+                + title + ", time: "
+                + TimeUtils.format(getTotalTime()) + ", "
+                + releaseYear + ", tracks: "
+                + tracks.size();
     }
 
     public String toFullString() {
@@ -68,6 +72,8 @@ public class CD {
         stringBuilder.append(artist);
         stringBuilder.append(", ");
         stringBuilder.append(title);
+        stringBuilder.append(", time: ");
+        stringBuilder.append(TimeUtils.format(getTotalTime()));
         stringBuilder.append(", ");
         stringBuilder.append(releaseYear);
         stringBuilder.append("\n");

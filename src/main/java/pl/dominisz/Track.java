@@ -16,7 +16,7 @@ public class Track {
 
     public String toString() {
         return title + ", "
-                + time + ", "
+                + TimeUtils.format(time) + ", "
                 + genre.getDescription() + ", wykonawca: "
                 + artist + ", kompozytor: "
                 + composer + ", autor tekstu: "
