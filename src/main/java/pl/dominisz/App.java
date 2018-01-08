@@ -53,6 +53,9 @@ public class App {
 
     private void showAllCDs() {
         List<CD> allCDs = library.getCdList();
+        for (int i = 0; i < allCDs.size(); i++) {
+            System.out.println((i + 1) + ". " + allCDs.get(i));
+        }
     }
 
     private void deleteCD() {
@@ -65,30 +68,12 @@ public class App {
 
     private void mainMenu() {
         System.out.println("Witamy w programie");
+        Menu mainMenu = createMainMenu();
         boolean again = true;
         while (again) {
-            showMainMenu();
-            int option = readInt(10);
-            switch (option) {
-                case 1:
-                    //addNewCD();
-                    break;
-                case 2:
-                    //deleteCD();
-                    break;
-                case 3:
-                    //showAllCDs();
-                    break;
-                case 4:
-                    //findByCDTitle();
-                    break;
-                case 5:
-                    //findTracksByTrackTitle();
-                    break;
-                case 10:
-                    again = false;
-                    break;
-            }
+            mainMenu.showMessages();
+            int option = readInt(mainMenu.size());
+            mainMenu.runAction(option);
         }
     }
 

@@ -15,6 +15,10 @@ public class Menu {
         menuItems = new ArrayList<>();
     }
 
+    public int size() {
+        return menuItems.size();
+    }
+
     public void add(MenuItem menuItem) {
         menuItems.add(menuItem);
     }
