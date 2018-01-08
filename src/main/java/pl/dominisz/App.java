@@ -8,7 +8,10 @@ import java.util.Scanner;
 
 public class App {
 
-    private static final int MAX_TRACK_COUNT = 30;
+    //zgodnie z https://pl.wikipedia.org/wiki/CD-Audio ;-)
+    private static final int MAX_TRACK_COUNT = 99;
+    private static final int MAX_TRACK_TIME = 99 * 60;
+
     private Library library;
     private Scanner in;
 
@@ -81,6 +84,7 @@ public class App {
 
     /**
      * Dodaje kilka utworów do płyty
+     *
      * @param cd
      */
     private void addNewTracks(CD cd) {
@@ -93,10 +97,41 @@ public class App {
 
     /**
      * Dodaje jeden utwór do płyty
+     *
      * @param cd
      */
     private void addNewTrack(CD cd) {
+        System.out.println("Podaj tytuł utworu");
+        String title = in.nextLine();
+        System.out.println("Podaj długość utworu w sekundach");
+        int time = readInt(MAX_TRACK_TIME);
+        Genre genre = readGenre();
+        System.out.println("Podaj wykonawcę");
+        String artist = in.nextLine();
+        System.out.println("Podaj kompozytora");
+        String composer = in.nextLine();
+        System.out.println("Podaj autora tekstu");
+        String lyricsAuthor = in.nextLine();
+        Track track = new TrackBuilder()
+                .withTitle(title)
+                .withTime(time)
+                .withGenre(genre)
+                .withArtist(artist)
+                .withComposer(composer)
+                .withLyricsAuthor(lyricsAuthor)
+                .build();
+        cd.addTrack(track);
+    }
 
+    private Genre readGenre() {
+        Genre[] allGenres = Genre.values();
+        System.out.println("Gatunki muzyki");
+        for (int i = 0; i < allGenres.length; i++) {
+            System.out.println((i + 1) + ". " + allGenres[i].getDescription());
+        }
+        System.out.println("Wybierz numer");
+        int index = readInt(allGenres.length) - 1;
+        return allGenres[index];
     }
 
     private void mainMenu() {
@@ -114,6 +149,7 @@ public class App {
     /**
      * Pobiera od użytkownika z klawiatury liczbę z przedziału <min, max>
      * Wymusza na użytkowniku podanie poprawnych danych
+     *
      * @param min najmniejsza dozwolona liczba całkowita
      * @param max największa dozwolona liczba całkowita
      * @return wczytana liczba
