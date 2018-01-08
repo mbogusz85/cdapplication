@@ -1,5 +1,6 @@
 package pl.dominisz;
 
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -7,6 +8,7 @@ import java.util.Scanner;
 
 public class App {
 
+    private static final int MAX_TRACK_COUNT = 30;
     private Library library;
     private Scanner in;
 
@@ -66,6 +68,34 @@ public class App {
     }
 
     private void addNewCD() {
+        System.out.println("Podaj tytuł płyty");
+        String title = in.nextLine();
+        System.out.println("Podaj wykonawce");
+        String artist = in.nextLine();
+        System.out.println("Podaj rok wydania");
+        int releaseDate = readInt(1950, LocalDate.now().getYear());
+        CD cd = new CD(title, artist, releaseDate);
+        addNewTracks(cd);
+        library.addCD(cd);
+    }
+
+    /**
+     * Dodaje kilka utworów do płyty
+     * @param cd
+     */
+    private void addNewTracks(CD cd) {
+        System.out.println("Podaj liczbę utworów");
+        int trackCount = readInt(MAX_TRACK_COUNT);
+        for (int i = 0; i < trackCount; i++) {
+            addNewTrack(cd);
+        }
+    }
+
+    /**
+     * Dodaje jeden utwór do płyty
+     * @param cd
+     */
+    private void addNewTrack(CD cd) {
 
     }
 
@@ -82,23 +112,27 @@ public class App {
     }
 
     /**
-     * Pobiera od użytkownika z klawiatury liczbę z przedziału <1, max>
-     * Wymusza na użytkwniku podanie poprawnych danych
-     *
+     * Pobiera od użytkownika z klawiatury liczbę z przedziału <min, max>
+     * Wymusza na użytkowniku podanie poprawnych danych
+     * @param min najmniejsza dozwolona liczba całkowita
      * @param max największa dozwolona liczba całkowita
      * @return wczytana liczba
      */
-    private int readInt(int max) {
+    private int readInt(int min, int max) {
         while (true) {
             try {
                 int menuPosition = Integer.parseInt(in.nextLine());
-                if (menuPosition >= 1 && menuPosition <= max) {
+                if (menuPosition >= min && menuPosition <= max) {
                     return menuPosition;
                 }
             } catch (NumberFormatException e) {
             }
-            System.out.println("Musisz podać liczbę od 1 do " + max + ".");
+            System.out.println("Musisz podać liczbę od " + min + " do " + max + ".");
         }
+    }
+
+    private int readInt(int max) {
+        return readInt(1, max);
     }
 
     public static void main(String[] args) {
