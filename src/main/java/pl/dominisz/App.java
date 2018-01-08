@@ -56,6 +56,9 @@ public class App {
         for (int i = 0; i < allCDs.size(); i++) {
             System.out.println((i + 1) + ". " + allCDs.get(i));
         }
+        System.out.println("Podaj numer płyty do wyświetlenia");
+        int index = readInt(library.getCdList().size()) - 1;
+        System.out.println(library.getCdList().get(index).toFullString());
     }
 
     private void deleteCD() {
@@ -72,6 +75,7 @@ public class App {
         boolean again = true;
         while (again) {
             mainMenu.showMessages();
+            System.out.println("Co wybierasz?");
             int option = readInt(mainMenu.size());
             mainMenu.runAction(option);
         }

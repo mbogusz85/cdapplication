@@ -63,4 +63,20 @@ public class CD {
         return artist + ", " + title + ", " + releaseYear + ", tracks: " + tracks.size();
     }
 
+    public String toFullString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(artist);
+        stringBuilder.append(", ");
+        stringBuilder.append(title);
+        stringBuilder.append(", ");
+        stringBuilder.append(releaseYear);
+        stringBuilder.append("\n");
+        for (int i = 0; i < tracks.size(); i++) {
+            stringBuilder.append(i+1);
+            stringBuilder.append(". ");
+            stringBuilder.append(tracks.get(i));
+            stringBuilder.append("\n");
+        }
+        return stringBuilder.toString();
+    }
 }
