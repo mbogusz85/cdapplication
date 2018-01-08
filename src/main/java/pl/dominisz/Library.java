@@ -26,6 +26,10 @@ public class Library {
         cdList = new ArrayList<>();
     }
 
+    public List<CD> getCdList() {
+        return cdList;
+    }
+
     public void addCD(CD cd) {
         cdList.add(cd);
     }

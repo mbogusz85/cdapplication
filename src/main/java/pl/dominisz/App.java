@@ -1,6 +1,7 @@
 package pl.dominisz;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -31,6 +32,35 @@ public class App {
         System.out.println("8. Wyszukaj utwory po gatunku");
         System.out.println("9. Wyszukaj płyty po roku wydania");
         System.out.println("10. Wyjdź z programu");
+    }
+
+    private Menu createMainMenu() {
+        Menu menu = new Menu();
+        menu.add("Dodaj nową płytę", () -> addNewCD());
+        menu.add("Usuń płytę", () -> deleteCD());
+        menu.add("Wyświetl wszystkie płyty", () -> showAllCDs());
+        menu.add("Wyszukaj płyty po tytule płyty", () -> findByCDTitle());
+        menu.add("Wyszukaj utwory po tytule utworu", () -> findTracksByTrackTitle());
+        return menu;
+    }
+
+    private void findTracksByTrackTitle() {
+    }
+
+    private void findByCDTitle() {
+
+    }
+
+    private void showAllCDs() {
+        List<CD> allCDs = library.getCdList();
+    }
+
+    private void deleteCD() {
+
+    }
+
+    private void addNewCD() {
+
     }
 
     private void mainMenu() {
