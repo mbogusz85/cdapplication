@@ -46,6 +46,7 @@ public class App {
         menu.add("Wyświetl wszystkie płyty", () -> showAllCDs());
         menu.add("Wyszukaj płyty po tytule płyty", () -> findByCDTitle());
         menu.add("Wyszukaj utwory po tytule utworu", () -> findTracksByTrackTitle());
+        menu.add("Wyjście z programu", () -> {});
         return menu;
     }
 
@@ -142,7 +143,11 @@ public class App {
             mainMenu.showMessages();
             System.out.println("Co wybierasz?");
             int option = readInt(mainMenu.size());
-            mainMenu.runAction(option);
+            if (option < mainMenu.size()) {
+                mainMenu.runAction(option);
+            } else {
+                again = false;
+            }
         }
     }
 
