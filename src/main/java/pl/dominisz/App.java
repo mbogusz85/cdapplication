@@ -1,9 +1,7 @@
 package pl.dominisz;
 
 import java.time.LocalDate;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Scanner;
 
 public class App {
@@ -35,43 +33,73 @@ public class App {
                 .addMenuItem("Usuń płytę", () -> deleteCD())
                 .addMenuItem("Wyświetl wszystkie płyty", () -> showAllCDs())
                 .addMenuItem("Wyszukaj płyty po tytule płyty", () -> findByCDTitle())
-                .addMenuItem("Wyszukaj płyty po roku wydania", () -> findCDByYearRelease())
                 .addMenuItem("Wyszukaj utwory po tytule utworu", () -> findTracksByTrackTitle())
+                .addMenuItem("Wyszukaj utwory po gatunku", () -> findTracksByTracksByGenre())
+                .addMenuItem("Wyszukaj płyty po gatunku", () -> findCDsByGenre())
+                .addMenuItem("Wyszukaj płyty po roku wydania", () -> findCDByReleaseYear())
                 .addExitItem("Wyjście z programu")
                 .build();
         return menu;
     }
 
+    private void findCDsByGenre() {
+        Genre genre = readGenre();
+        List<CD> cdsByGenre = library.findCDsByGenre(genre);
+        showList("Znalezione płyty dla gatunku: ", cdsByGenre);
+    }
+
+    private void findTracksByTracksByGenre() {
+        Genre genre = readGenre();
+        List<Track> tracks = library.findTracksByGenre(genre);
+        showList("Znalezione utwory dla gatunku: " + genre.getDescription(), tracks);
+    }
+
+    private void showList(String title, List<? extends Object> objects) {
+        System.out.println(title);
+        if (!objects.isEmpty()) {
+            for (int i = 0; i < objects.size(); i++) {
+                System.out.println((i + 1) + ". " + objects.get(i));
+            }
+        } else {
+            System.out.println("Lista jest pusta");;
+        }
+    }
+
     private void findTracksByTrackTitle() {
+        System.out.println("Wprowadź szukany tytuł: ");
+        String searchTitle = in.nextLine();
+        List<Track> foundedTracks = library.findTracksByTrackTitle(searchTitle);
+        showList("Utwory o podanym tytule: ", foundedTracks);
     }
 
     private void findByCDTitle() {
-
+        System.out.println("Podaj tytuł płyty: ");
+        String searchTitle = in.nextLine();
+        List<CD> foundedCDs = library.findByCDTitle(searchTitle);
+        showList("Płyty o podanym tytule: ", foundedCDs);
     }
 
-    private void findCDByYearRelease() {
+    private void findCDByReleaseYear() {
         System.out.println("Podaj rok wydania płyty");
         int year = scannerUtils.readInt(1930, LocalDate.now().getYear());
         List<CD> CDByYear = library.findByReleaseYear(year);
-        if (CDByYear.isEmpty()) {
-            System.out.println("Brak płyt wydanych w roku " + year);
-        } else {
-            CDByYear.stream().forEach(System.out::println);
-        }
+        showList("Płyty wydane w roku " + year, CDByYear);
     }
 
     private void showAllCDs() {
         List<CD> allCDs = library.getCdList();
-        for (int i = 0; i < allCDs.size(); i++) {
-            System.out.println((i + 1) + ". " + allCDs.get(i));
-        }
+        showList("Płyty w bibliotece: ", allCDs);
         System.out.println("Podaj numer płyty do wyświetlenia");
         int index = scannerUtils.readInt(library.getCdList().size()) - 1;
         System.out.println(library.getCdList().get(index).toFullString());
     }
 
     private void deleteCD() {
-
+        List<CD> allCDs = library.getCdList();
+        showList("Płyty w bibliotece: ", allCDs);
+        System.out.println("Podaj numer płyty którą chcesz usunąć");
+        int option = scannerUtils.readInt(allCDs.size());
+        library.removeCD(option - 1);
     }
 
     private void addNewCD() {
