@@ -35,6 +35,7 @@ public class App {
                 .addMenuItem("Usuń płytę", () -> deleteCD())
                 .addMenuItem("Wyświetl wszystkie płyty", () -> showAllCDs())
                 .addMenuItem("Wyszukaj płyty po tytule płyty", () -> findByCDTitle())
+                .addMenuItem("Wyszukaj płyty po roku wydania", () -> findCDByYearRelease())
                 .addMenuItem("Wyszukaj utwory po tytule utworu", () -> findTracksByTrackTitle())
                 .addExitItem("Wyjście z programu")
                 .build();
@@ -46,6 +47,17 @@ public class App {
 
     private void findByCDTitle() {
 
+    }
+
+    private void findCDByYearRelease() {
+        System.out.println("Podaj rok wydania płyty");
+        int year = scannerUtils.readInt(1930, LocalDate.now().getYear());
+        List<CD> CDByYear = library.findByReleaseYear(year);
+        if (CDByYear.isEmpty()) {
+            System.out.println("Brak płyt wydanych w roku " + year);
+        } else {
+            CDByYear.stream().forEach(System.out::println);
+        }
     }
 
     private void showAllCDs() {
